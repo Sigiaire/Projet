@@ -1,3 +1,6 @@
-import file_read
+from file_read import lines_from_file
+from getters import get_host, get_complete_date
 
-print(file_read.lines_from_file(r"log/syslog.log"))
+file = lines_from_file(r"TIR121_TI1E_WattierTristan\log\syslog.log")
+
+print(get_host(file[0]))

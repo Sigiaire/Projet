@@ -12,3 +12,4 @@ def lines_from_file(path):
     except Exception as e :
         print(e)
         return []
+    
