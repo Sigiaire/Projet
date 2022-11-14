@@ -19,3 +19,4 @@ def get_message(line):
             !!! le message peut être composé de sous messages (séparés pas d’autres « : »),
                 dans ce cas, il faut tout
     """
+    
