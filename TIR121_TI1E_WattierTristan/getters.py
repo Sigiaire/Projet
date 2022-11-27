@@ -44,8 +44,8 @@ def get_process_id(line):
     try:
         split_line = line.split("[")
         split_line = split_line[1].split("]")
-        process_id = split_line[0]
-        return int(process_id)
-    except:
+        process_id = split_line[0].split()
+        return int(float(process_id[0])) if int(float(process_id[0])) > 0 else -1
+    except (IndexError, ValueError):
         process_id = -1
         return process_id

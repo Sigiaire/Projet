@@ -1,9 +1,9 @@
 from file_read import lines_from_file
-from getters import *
+from getters import get_host, get_complete_date, get_message, get_program, get_process_id
 
 file = lines_from_file(r"TIR121_TI1E_WattierTristan\log\syslog.log")
 
-for i in range(100):
+for i in range(5000):
     print(f"\n=============================\n======LIGNE NUMÉRO {i+1}======\n=============================")
     print(f"===HOST===  {get_host(file[i])}")
     print(f"===DATE===  {get_complete_date(file[i])}")
