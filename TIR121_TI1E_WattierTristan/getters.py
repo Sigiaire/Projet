@@ -20,7 +20,8 @@ def get_message(line):
                 dans ce cas, il faut tout
     """
     split_line = line.split(":",3)
-    return split_line[-1]
+    message = split_line[-1]
+    return message
     
 def get_program(line):
     """ Pre : line est une ligne de log bien formée (str)
