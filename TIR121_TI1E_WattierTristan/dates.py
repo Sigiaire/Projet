@@ -44,3 +44,16 @@ def formated_date(date):
     day = split_date[1]
     time = split_date[2]
     return f"{month}:{day} {time}"
+
+def logs_between(logs, date_min="00:00 00:00:00", date_max="99:99 00:00:00"):
+    """ 
+    Pre :
+        - logs est une liste où chaque élément est une ligne de log bien formée
+        - date_min et _max sont des str représentant une date (et heure) au
+format "XX:JJ HH:MM:SS". Par défaut, ils ont de valeurs absurdes permettant de
+prendre tout.
+        - date_min est plus petit que date_max
+    Post :
+        - retourne une liste de logs qui concernent des dates entre date_min et
+date_max (inclus).
+    """
