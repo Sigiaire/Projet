@@ -11,7 +11,8 @@ def get_complete_date(line):
             sans changer le format.
     """
     split_line = line.split()
-    return split_line[2]
+    date = " ".join(split_line[0:3])
+    return date
 
 def get_message(line):
     """ Pre : line est une ligne de log bien formée (str)
@@ -29,17 +30,24 @@ def get_program(line):
     """
     split_line = line.split("[", 2)
     split_line = split_line[0].split()
-    return split_line[4]
+    program = split_line[4]
+    program = program[:-1] if program.endswith(":") else program
+    return program
     
 def get_process_id(line):
     """ Pre : line est une ligne de log bien formée (str)
         Post : Retourne le numéro du processus. Si aucun id n’est disponible
             (dans le cas d’un kernel par exemple), -1 est retourné.
     """
-    split_line = line.split("[")
-    split_line = split_line[1].split("]")
+    # q: how to return the number between the square brackets
+    # a: split the line by the square brackets, then split the second part by the space
     try:
-        float(split_line[0].strip())
-        return int(split_line[0])
+        split_line = line.split("[")
+        split_line = split_line[1].split("]")
+        process_id = split_line[0]
+        process_id = process_id.split()
+        process_id = process_id[0]
+        return int(float(process_id))
     except:
-        return -1
+        process_id = -1
+        return process_id

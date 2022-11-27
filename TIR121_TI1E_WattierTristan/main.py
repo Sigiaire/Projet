@@ -3,7 +3,7 @@ from getters import *
 
 file = lines_from_file(r"TIR121_TI1E_WattierTristan\log\syslog.log")
 
-for i in range(257):
+for i in range(5000):
     print(f"\n{i+1}\n")
     print(f"{get_host(file[i])}")
     print(f"{get_complete_date(file[i])}")
