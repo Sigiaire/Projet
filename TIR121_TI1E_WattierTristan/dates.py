@@ -1,17 +1,18 @@
 def logs_by_day(logs, day):
     """
-    Pre :
-        - logs est une liste où chaque élément est une ligne de log bien formée
-        - day (str) est une date au format « Moi JJ »
-    Post :
-        - retourne une liste de logs qui concernent uniquement le jour
+        Pre :
+            - logs est une liste où chaque élément est une ligne de log bien formée
+            - day (str) est une date au format « Moi JJ »
+        Post :
+            - retourne une liste de logs qui concernent uniquement le jour
             correspondant à day.
     """
+
     for log_line in logs: # la boucle for parcourt la liste logs et affecte à log_line chaque élément de la liste
         split_line = log_line.split() # split_line est une liste qui contient les éléments de log_line séparés par des espaces
         date = " ".join(split_line[0:2]) # date est une str qui contient les 2 premiers éléments de split_line
         if date == day: # si la date du log est égale au jour demandé
-            print(log_line) # on affiche le log
+            return [log_line]
 
 def formated_date(date):
     """
