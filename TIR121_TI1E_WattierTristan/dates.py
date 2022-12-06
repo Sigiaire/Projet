@@ -1,3 +1,5 @@
+from getters import get_complete_date
+
 def logs_by_day(logs, day):
     """
         Pre :
@@ -7,12 +9,15 @@ def logs_by_day(logs, day):
             - retourne une liste de logs qui concernent uniquement le jour
             correspondant à day.
     """
-
-    for log_line in logs: # la boucle for parcourt la liste logs et affecte à log_line chaque élément de la liste
-        split_line = log_line.split() # split_line est une liste qui contient les éléments de log_line séparés par des espaces
-        date = " ".join(split_line[0:2]) # date est une str qui contient les 2 premiers éléments de split_line
-        if date == day: # si la date du log est égale au jour demandé
-            return [log_line]
+    filtered_logs = [] # la liste qui contiendra les logs filtrés
+    
+    for log_line in logs:
+        split_line = log_line.split()
+        date = " ".join(split_line[0:2])
+        if date == day: 
+            filtered_logs.append(log_line)
+            
+    return filtered_logs
 
 def formated_date(date):
     """
@@ -58,3 +63,14 @@ prendre tout.
         - retourne une liste de logs qui concernent des dates entre date_min et
 date_max (inclus).
     """
+    
+    filtered_logs = [] # la liste qui contiendra les logs filtrés
+    
+    for log_line in logs:
+        date = get_complete_date(log_line)
+        date = formated_date(date)
+        
+        if date >= date_min and date <= date_max: 
+            filtered_logs.append(log_line)
+            
+    return filtered_logs
