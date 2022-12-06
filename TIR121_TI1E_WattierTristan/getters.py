@@ -39,13 +39,16 @@ def get_process_id(line):
         Post : Retourne le numéro du processus. Si aucun id n’est disponible
             (dans le cas d’un kernel par exemple), -1 est retourné.
     """
-    # q: how to return the number between the square brackets
-    # a: split the line by the square brackets, then split the second part by the space
     try:
-        split_line = line.split("[")
-        split_line = split_line[1].split("]")
-        process_id = split_line[0].split()
-        return int(float(process_id[0])) if int(float(process_id[0])) > 0 else -1
+        program = get_program(line) # On va tester si le programme est un kernel
+        if program == "kernel":
+            process_id = -1
+            return process_id
+        else:
+            split_line = line.split("[")
+            split_line = split_line[1].split("]")
+            process_id = split_line[0].split()
+            return int(float(process_id[0])) if int(float(process_id[0])) > 0 else -1
     except (IndexError, ValueError):
         process_id = -1
         return process_id
