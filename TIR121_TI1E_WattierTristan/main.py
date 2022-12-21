@@ -30,13 +30,14 @@ def logs_from_program(logs, program):
         - retourne une liste de logs qui concernent uniquement les programmes
             correspondant à "program"
     """
-    error_logs = []
+    program_logs = []
     
     for log_line in logs:
-        if program in log_line:
-            error_logs.append(log_line)
+        log_program = get_program(log_line)
+        if program in log_program:
+            program_logs.append(log_line)
             
-    return error_logs
+    return program_logs
 
 def list_process_for_program(logs, program):
     """ Pre :
@@ -52,9 +53,30 @@ def list_process_for_program(logs, program):
         log_program = get_program(log_line)
         if program in log_program:
             process = get_process_id(log_line)
-            processes.append(process)
+            if process not in processes:
+                if process != -1 :
+                    processes.append(process)
             
     return processes
+
+def suspects(logs, limit):
+    """ Pre :
+        - logs est une liste où chaque élément est une ligne de log bien formée
+        - limit est le nombre limite d'erreurs tolérées pour un programme
+    Post :
+        - retourne une liste des programmes (sans doublons) qui ont généré
+            plus que le nombre limite de log signalant des erreurs (error).
+    """
+    suspects = []
+    
+    for log_line in logs:
+        if "error" in log_line.lower():
+            program = get_program(log_line)
+            if program not in suspects:
+                if len(logs_from_program(logs, program)) >= limit:
+                    suspects.append(program)
+            
+    return suspects
 
 if __name__ == '__main__':
     file = lines_from_file(r"TIR121_TI1E_WattierTristan\log\syslog.log")
@@ -72,7 +94,7 @@ if __name__ == '__main__':
     # print(logs_with_tag(file))
     # print(logs_from_program(file, "kernel"))
     
-    print(list_process_for_program(file, "kernel"))
+    print(list_process_for_program(file, "rtkit-daemon"))
     
 # for i in range(5000):
 #     print(f"\n=============================\n======LIGNE NUMÉRO {i+1}======\n=============================")
