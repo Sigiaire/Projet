@@ -28,11 +28,17 @@ def get_program(line):
     """ Pre : line est une ligne de log bien formée (str)
         Post : Retourne le nom du programme
     """
-    split_line = line.split("[", 2)
-    split_line = split_line[0].split()
-    program = split_line[4]
+    split_line = line.split()
+
+    program_with_bracket = split_line[4]
+
+    program_split = program_with_bracket.split("[")
+
+    program = program_split[0]
     program = program[:-1] if program.endswith(":") else program
+    
     return program
+    
     
 def get_process_id(line):
     """ Pre : line est une ligne de log bien formée (str)
